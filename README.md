@@ -1,1 +1,1 @@
-# sistemas-microcontrolados
+# Repositório da disciplina de Sistemas Microcontrolados
