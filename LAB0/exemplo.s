@@ -4,108 +4,87 @@
 ; 12/03/2018
 
 ; -------------------------------------------------------------------------------
-        THUMB                        ; InstruÁıes do tipo Thumb-2
+        THUMB                        ; Instru√ß√µes do tipo Thumb-2
 ; -------------------------------------------------------------------------------
-; DeclaraÁıes EQU - Defines
+; Declara√ß√µes EQU - Defines
 ;<NOME>         EQU <VALOR>
 ; -------------------------------------------------------------------------------
-; ¡rea de Dados - DeclaraÁıes de vari·veis
+; √Årea de Dados - Declara√ß√µes de vari√°veis
 		AREA  DATA, ALIGN=2
-		; Se alguma vari·vel for chamada em outro arquivo
-		;EXPORT  <var> [DATA,SIZE=<tam>]   ; Permite chamar a vari·vel <var> a 
+		; Se alguma vari√°vel for chamada em outro arquivo
+		;EXPORT  <var> [DATA,SIZE=<tam>]   ; Permite chamar a vari√°vel <var> a 
 		                                   ; partir de outro arquivo
-;<var>	SPACE <tam>                        ; Declara uma vari·vel de nome <var>
+;<var>	SPACE <tam>                        ; Declara uma vari√°vel de nome <var>
                                            ; de <tam> bytes a partir da primeira 
-                                           ; posiÁ„o da RAM		
+                                           ; posi√ß√£o da RAM		
 
 ; -------------------------------------------------------------------------------
-; ¡rea de CÛdigo - Tudo abaixo da diretiva a seguir ser· armazenado na memÛria de 
-;                  cÛdigo
+; √Årea de C√≥digo - Tudo abaixo da diretiva a seguir ser√° armazenado na mem√≥ria de 
+;                  c√≥digo
         AREA    |.text|, CODE, READONLY, ALIGN=2
 
-		; Se alguma funÁ„o do arquivo for chamada em outro arquivo	
-        EXPORT Start                ; Permite chamar a funÁ„o Start a partir de 
+		; Se alguma fun√ß√£o do arquivo for chamada em outro arquivo	
+        EXPORT Start                ; Permite chamar a fun√ß√£o Start a partir de 
 			                        ; outro arquivo. No caso startup.s
 									
-		; Se chamar alguma funÁ„o externa	
+		; Se chamar alguma fun√ß√£o externa	
         ;IMPORT <func>              ; Permite chamar dentro deste arquivo uma 
-									; funÁ„o <func>
+									; fun√ß√£o <func>
 
 ; -------------------------------------------------------------------------------
-; FunÁ„o main()
+; Fun√ß√£o main()
 Start  
-; Comece o cÛdigo aqui <======================================================
+; Comece o c√≥digo aqui <======================================================
 
 lista EQU 0x20000200 
 primos EQU 0x20000300
 
 main
 	LDR R0, =lista
-	MOV R2, #0           ;Arnazena o tamanho da lista
 	MOV R1, #50
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #65
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #229
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #201
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #101
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #43
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #27
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #2
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #5
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #210
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #101
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #239
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #73
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #29
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #207
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #135
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #33
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #227
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #13
 	STRB R1, [R0], #2
-	ADD R2, #1
 	MOV R1, #9
 	STRB R1, [R0]
-	ADD R2, #1
 	
-	LDR R2, =primos
-	LDR R3, =lista
-	MOV R1, #0
+	LDR R2, =primos 	; Endereco para inserir o proximo primo
+	LDR R3, =lista  	; Endereco do proximo numero a ser lido da RAM
+	MOV R1, #0		; Quantidade de primos encontrados
 	
 	B percorreLista
 	NOP
@@ -119,9 +98,9 @@ percorreLista
 	NOP
 	
 verificaPrimo
-	MOV R5, #2
+	MOV R5, #2	
 loop
-	UDIV R6, R4, R5
+	UDIV R6, R4, R5		
 	MLS R7, R5, R6, R4
 	CMP R7, #0
 	IT EQ
@@ -139,9 +118,9 @@ inserePrimo
 	NOP
 	
 bubbleSort
-	MOV R6, #1                   ;Quantas vezes varreu a lista
+	MOV R6, #1              ; Quantas vezes varreu a lista
 loopPai
-	MOV R5, #1					;Quantas vezes comparou 2 elementos
+	MOV R5, #1		; Quantas vezes comparou 2 elementos
 	LDR R2, =primos
 loopFilho
 	LDRB R3, [R2], #2
@@ -160,5 +139,5 @@ fim
 	B fim
 	
 	
-    ALIGN                           ; garante que o fim da seÁ„o est· alinhada 
-    END                             ; fim do arquivo
+    ALIGN                           ; Garante que o fim da se√ß√£o est√° alinhada 
+    END                             ; Fim do arquivo
