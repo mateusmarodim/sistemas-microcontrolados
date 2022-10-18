@@ -36,7 +36,8 @@
         ;IMPORT <func>              ; Permite chamar dentro deste arquivo uma 
 									; função <func>
 		IMPORT  PLL_Init
-		IMPORT  SysTick_Init	
+		IMPORT  SysTick_Init
+		IMPORT  SysTick_Wait1ms			
 		IMPORT  GPIO_Init
 		IMPORT PortB_Output			; Permite chamar PortN_Output de outro arquivo
 		IMPORT PortP_Output			; Permite chamar PortN_Output de outro 
@@ -50,12 +51,14 @@
 
 ; -------------------------------------------------------------------------------
 
-frase_inicio_1				DCB   'C', 'o', 'f', 'r', 'e', ' ', 'a', 'b', 'e', 'r', 't', 'o', ',', 0
-frase_inicio_2				DCB   'd', 'i', 'g', 'i', 't', 'e', ' ', 'n', 'o', 'v', 'a', ' ', 's', 'e', 'n', 'h', 'a', ' ', 'p', 'a', 'r', 'a', ' ', 'f', 'e', 'c', 'h', 'a', 'r', ' ', 'o', ' ', 'c', 'o', 'f', 'r', 'e', 0
-fechado				DCB   'C', 'o', 'f', 'r', 'e', ' ', 'f', 'e', 'c', 'h', 'a', 'd', 'o', 0
-fechando				DCB   'C', 'o', 'f', 'r', 'e', ' ', 'f', 'e', 'c', 'h', 'a', 'n', 'd', 'o', 0
+frase_inicio_1		DCB   'C', 'o', 'f', 'r', 'e', ' ', 'a', 'b', 'e', 'r', 't', 'o', ',', 0
+frase_inicio_2		DCB   'd', 'i', 'g', 'i', 't', 'e', ' ', 'n', 'o', 'v', 'a', ' ', 's', 'e', 'n', 'h', 'a', ' ', 'p', 'a', 'r', 'a', ' ', 'f', 'e', 'c', 'h', 'a', 'r', ' ', 'o', ' ', 'c', 'o', 'f', 'r', 'e', 0
+fechado_msg				DCB   'C', 'o', 'f', 'r', 'e', ' ', 'f', 'e', 'c', 'h', 'a', 'd', 'o', 0
+fechando			DCB   'C', 'o', 'f', 'r', 'e', ' ', 'f', 'e', 'c', 'h', 'a', 'n', 'd', 'o', 0
 abrindo				DCB   'C', 'o', 'f', 'r', 'e', ' ', 'a', 'b', 'r', 'i', 'n', 'd', 'o', 0
 travado				DCB   'C', 'o', 'f', 'r', 'e', ' ', 't', 'r', 'a', 'v', 'a', 'd', 'o', 0
+senha_mestra_1		DCB   'D', 'i', 'g', 'i', 't', 'e', ' ', 'a', ' ', 's', 'e', 'n', 'h', 'a', 0
+senha_mestra_2		DCB   'm', 'e', 's', 't', 'r', 'a', ':', ' ', 0
 ;
 ; R12 senha de segurança
 ; R11 senha do usuario
@@ -72,11 +75,13 @@ Start
 	BL LCD_Init
 	
 	MOV R12, #1234
+
+MainLoop
 	MOV R7, #0
 	MOV R8, #0
 	MOV R9, #0
-
-MainLoop
+	MOV R0, #0x01
+	BL LCD_Instrucao
 	LDR R4, =frase_inicio_1
 	BL Imprime_Frase
 	
@@ -88,36 +93,95 @@ espera_entrada
 	
 	CMP R0, #-1
 	BEQ espera_entrada
+espera_soltar
+	MOV R6, R0
+	BL Teclas_Input
+	CMP R0, #-1
+	BNE espera_soltar
+	
+	CMP R6, #10
+	BEQ fechar_cofre
 	
 	CMP R7, #0
 	ITT EQ
 		MOVEQ R1, #1000
-		MULEQ R11, R0, R1
+		MULEQ R11, R6, R1
 	CMP R7, #1
 	ITT EQ
 		MOVEQ R1, #100
-		MLAEQ R11, R0, R1, R11
+		MLAEQ R11, R6, R1, R11
 	CMP R7, #2
 	ITT EQ
 		MOVEQ R1, #10
-		MLAEQ R11, R0, R1, R11
+		MLAEQ R11, R6, R1, R11
 	CMP R7, #3
 	ITT EQ
 		MOVEQ R1, #1
-		MLAEQ R11, R0, R1, R11
+		MLAEQ R11, R6, R1, R11
 	CMP R7, #4
 	BEQ quatro_digitos
-	ADD R0, #48
+	ADD R6, #48
+	MOV R0, R6
 	BL LCD_Caracter
 	B soma
 quatro_digitos
 	BL Manter_4_digitos
 soma
 	ADD R7, #1
-	
-	
-	
 	B espera_entrada
+fechar_cofre
+	MOV R0, #0x01
+	BL LCD_Instrucao
+	LDR R4, =fechando
+	BL Imprime_Frase
+	MOV R0, #5000
+	BL SysTick_Wait1ms
+	
+fechado
+	MOV R0, #0x01
+	BL LCD_Instrucao
+	LDR R4, =fechado_msg
+	BL Imprime_Frase
+	MOV R7, #0
+	
+	MOV R0, #0xC0
+	BL LCD_Instrucao
+	
+espera_entrada_f
+	BL Teclas_Input				 ;Chama a subrotina que lê o estado das teclas e coloca o resultado em R0
+	
+	CMP R0, #-1
+	BEQ espera_entrada_f
+espera_soltar_f
+	MOV R6, R0
+	BL Teclas_Input
+	CMP R0, #-1
+	BNE espera_soltar_f
+
+	CMP R7, #0
+	ITT EQ
+		MOVEQ R1, #1000
+		MULEQ R10, R6, R1
+	CMP R7, #1
+	ITT EQ
+		MOVEQ R1, #100
+		MLAEQ R10, R6, R1, R10
+	CMP R7, #2
+	ITT EQ
+		MOVEQ R1, #10
+		MLAEQ R10, R6, R1, R10
+	CMP R7, #3
+	ITTT EQ
+		MOVEQ R1, #1
+		MLAEQ R10, R6, R1, R10
+		BLEQ Testa_Senha
+		
+	ADD R6, #48
+	MOV R0, R6
+	BL LCD_Caracter
+	ADD R7, #1
+	B espera_entrada_f
+					
 					
 Imprime_Frase
 	PUSH {LR}
@@ -131,6 +195,34 @@ fim
 	POP {LR}
 	BX LR
 	
+Testa_Senha	
+	CMP R10, R11
+	BEQ abre
+	
+	ADD R9, #1
+	MOV R10, #0
+	CMP R9, #3
+	BNE fechado
+	
+	BL Trava_Cofre
+abre
+	MOV R0, #0x01
+	BL LCD_Instrucao
+	LDR R4, =abrindo
+	BL Imprime_Frase
+	MOV R0, #5000
+	BL SysTick_Wait1ms
+	
+	B MainLoop
+	
+Trava_Cofre
+	MOV R0, #0x01
+	BL LCD_Instrucao
+	LDR R4, =travado
+	BL Imprime_Frase
+loop
+	B loop
+	
 Manter_4_digitos
 	PUSH {LR}
 	
@@ -138,7 +230,7 @@ Manter_4_digitos
 	MOV R3, #10
 	UDIV R2,R11, R1
 	MLS R11, R2, R1, R11
-	MLA R11, R3,R11, R0
+	MLA R11, R3,R11, R6
 	SUB R7,#1
 	
 	MOV R0, #0xC0
