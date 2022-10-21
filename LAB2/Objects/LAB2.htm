@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LAB2.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LAB2.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Tue Oct 18 09:35:37 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Tue Oct 18 11:56:31 2022
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -15,14 +15,15 @@ Functions with no stack information
  <LI><a href="#[0]">Reset_Handler</a>
  <LI><a href="#[74]">GPIO_Init</a>
  <LI><a href="#[75]">Seg7_Output</a>
- <LI><a href="#[76]">PortB_Output</a>
- <LI><a href="#[77]">PortP_Output</a>
+ <LI><a href="#[77]">PortB_Output</a>
+ <LI><a href="#[76]">PortP_Output</a>
  <LI><a href="#[78]">PortJ_Input</a>
  <LI><a href="#[6c]">Teclas_Input</a>
  <LI><a href="#[6e]">LCD_Init</a>
  <LI><a href="#[6f]">LCD_Instrucao</a>
  <LI><a href="#[71]">LCD_Caracter</a>
  <LI><a href="#[6b]">Start</a>
+ <LI><a href="#[3d]">GPIOPortJ_Handler</a>
  <LI><a href="#[72]">PLL_Init</a>
  <LI><a href="#[73]">SysTick_Init</a>
  <LI><a href="#[6d]">SysTick_Wait1ms</a>
@@ -74,7 +75,7 @@ Function Pointers
  <LI><a href="#[28]">GPIOPortF_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[29]">GPIOPortG_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[2a]">GPIOPortH_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[3d]">GPIOPortJ_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
+ <LI><a href="#[3d]">GPIOPortJ_Handler</a> from main.o(.text) referenced from startup.o(RESET)
  <LI><a href="#[3e]">GPIOPortK_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[3f]">GPIOPortL_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[50]">GPIOPortM_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
@@ -306,9 +307,6 @@ Global Symbols
 <P><STRONG><a name="[2a]"></a>GPIOPortH_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[3d]"></a>GPIOPortJ_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
-<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
-</UL>
 <P><STRONG><a name="[3e]"></a>GPIOPortK_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
@@ -526,11 +524,15 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
 
-<P><STRONG><a name="[75]"></a>Seg7_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text), UNUSED)
+<P><STRONG><a name="[75]"></a>Seg7_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
 
-<P><STRONG><a name="[76]"></a>PortB_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text), UNUSED)
+<P><STRONG><a name="[77]"></a>PortB_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text), UNUSED)
 
-<P><STRONG><a name="[77]"></a>PortP_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text), UNUSED)
+<P><STRONG><a name="[76]"></a>PortP_Output</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
+</UL>
 
 <P><STRONG><a name="[78]"></a>PortJ_Input</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gpio.o(.text), UNUSED)
 
@@ -569,11 +571,16 @@ Global Symbols
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Instrucao
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Init
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Teclas_Input
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortP_Output
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Seg7_Output
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
 </UL>
 
+<P><STRONG><a name="[3d]"></a>GPIOPortJ_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, main.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
 <P><STRONG><a name="[72]"></a>PLL_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start
 </UL>
