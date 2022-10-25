@@ -286,6 +286,9 @@ inicio
 	LDR R4, =senha_mestra_2
 	BL Imprime_Frase
 	
+	MOV R11, #0
+	MOV R9, #1
+	
 espera_entrada_i
 	ADD R11, #1
 	MOV R2, #-1
