@@ -52,16 +52,16 @@ uint8_t rotaciona[33] = "Volta:0X Vel:2/2     horario#";
 uint8_t final[] = "FIM#"; 
 
 uint32_t nvoltas = 0;
-uint8_t flag = 0;
+uint8_t flag = 0; //sinaliza que o nvoltas foi digitado
 uint32_t sentido = 0;
 uint32_t passo = 0;
 uint32_t passoAtual = 0;
-uint32_t PassoCompleto[4] = { 0x03, 0x06, 0x0C, 0x09 };
-uint32_t MeioPasso[8] = { 0x01, 0x03, 0x02, 0x06, 0x04, 0x0C, 0x08, 0x09 };
-uint32_t limite = 8;
+uint32_t PassoCompleto[4] = { 0x03, 0x06, 0x0C, 0x09 }; //todos os 4 passos do ciclo do passo completo
+uint32_t MeioPasso[8] = { 0x01, 0x03, 0x02, 0x06, 0x04, 0x0C, 0x08, 0x09 }; //todos os 8 passos do ciclo do meio passo
+uint32_t limite = 8; // auxilia a funçao de passo
 uint32_t contPassos = 0;
-uint32_t vetorLEDS = 0;
-uint8_t ledTimer = 0;
+uint32_t vetorLEDS = 0; //quais leds devem ser acesos
+uint8_t ledTimer = 0; // led do temporizador
 
 int main(void)
 {
@@ -77,7 +77,7 @@ int main(void)
 		switch (estadoAtual){
 			case Espera: //ler entrada do teclado e conferir se é '*'
 				tecla = -1;
-				while(tecla != 10){
+				while(tecla != 10){// enquanto n for *
 					tecla = Teclas_Input(&GPIO_PORTL_DATA_R,&GPIO_PORTM_DIR_R,&GPIO_PORTM_DATA_R);
 				}
 				SysTick_Wait1ms(500);
@@ -87,7 +87,7 @@ int main(void)
 				Imprime_Frase(voltas);
 				while(flag == 0){
 					tecla = -1;
-					while(tecla <1 || tecla > 10){
+					while(tecla <1 || tecla > 10){ //digita 1 numero
 						tecla = Teclas_Input(&GPIO_PORTL_DATA_R,&GPIO_PORTM_DIR_R,&GPIO_PORTM_DATA_R);
 					}
 					if(tecla == 10 && nvoltas != 0)
@@ -95,7 +95,7 @@ int main(void)
 					else
 						nvoltas = tecla;
 					
-					if(tecla == 1){
+					if(tecla == 1){//se for 1 pode digitar 0 para virar 10
 						while(tecla != -1){ //espera soltar o botao
 						tecla = Teclas_Input(&GPIO_PORTL_DATA_R,&GPIO_PORTM_DIR_R,&GPIO_PORTM_DATA_R);
 						}
@@ -115,7 +115,7 @@ int main(void)
 			case Direcao:
 				Imprime_Frase(direcao);
 				tecla = -1;
-				while(tecla != 1 && tecla != 2){
+				while(tecla != 1 && tecla != 2){ // 1 para horario e 2 anti horario
 					tecla = Teclas_Input(&GPIO_PORTL_DATA_R,&GPIO_PORTM_DIR_R,&GPIO_PORTM_DATA_R);
 				}
 				vetorLEDS = tecla == 1 ? 1 : 0x80;
@@ -128,16 +128,16 @@ int main(void)
 				}
 				Imprime_Frase(velocidade);
 				tecla = -1;
-				while(tecla != 1 && tecla != 2){
+				while(tecla != 1 && tecla != 2){//1 para passo completo e 2 meio passo
 						tecla = Teclas_Input(&GPIO_PORTL_DATA_R,&GPIO_PORTM_DIR_R,&GPIO_PORTM_DATA_R);
 				}
 					passo = tecla;
 					estadoAtual = Rotaciona;
 			break;
 			case Rotaciona:
-				PortA_Output(vetorLEDS);
+				PortA_Output(vetorLEDS);//acende 0 1 LED
 				PortQ_Output(vetorLEDS);
-				GPIO_PORTJ_AHB_IM_R = 0x1;
+				GPIO_PORTJ_AHB_IM_R = 0x1; //ativa interrupcao
 				preencheFraseRotacao();
 				Imprime_Frase(rotaciona);
 				while(nvoltas > 0){
@@ -170,7 +170,7 @@ void GPIOPortJ_Handler(void){
 void Imprime_Frase(uint8_t* frase){
 	LCD_Instrucao(0x01);
 	int i = 0;
-	while(frase[i] != '#'){
+	while(frase[i] != '#'){// '#' sinalzia fim da string
 		LCD_Caracter(frase[i]);
 		i++;
 		if(i == 16)
@@ -232,12 +232,12 @@ void passoMotor(void) {
 }
 
 void LEDScheck(void){
-	if(contPassos == PASSOS_TOTAL / 8 * passo){
-		if(vetorLEDS == 255){
+	if(contPassos == PASSOS_TOTAL / 8 * passo){//45 graus
+		if(vetorLEDS == 255){//se tiver completado 1 volta
 			vetorLEDS = 0;
 			--nvoltas;
 			rotaciona[6] = '0';
-			rotaciona[7] = (char)(nvoltas + 48);
+			rotaciona[7] = (char)(nvoltas + 48); // numero int pra char
 			Imprime_Frase(rotaciona);
 		}
 		if(sentido == 1){

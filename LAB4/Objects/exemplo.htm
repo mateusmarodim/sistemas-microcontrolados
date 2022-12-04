@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\exemplo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\exemplo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Tue Nov 22 09:55:22 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Dec 04 17:15:26 2022
 <BR><P>
-<H3>Maximum Stack Usage =         40 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =         32 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; LEDScheck &rArr; Imprime_Frase &rArr; LCD_Instrucao
+__rt_entry_main &rArr; main &rArr; funcRotacionaTer &rArr; imprimeStatus &rArr; uartNumero
 <P>
 <H3>
 Functions with no stack information
@@ -18,12 +18,10 @@ Functions with no stack information
  <LI><a href="#[bc]">StartCritical</a>
  <LI><a href="#[bd]">EndCritical</a>
  <LI><a href="#[be]">WaitForInterrupt</a>
- <LI><a href="#[83]">__user_initial_stackheap</a>
- <LI><a href="#[8d]">PLL_Init</a>
- <LI><a href="#[8e]">SysTick_Init</a>
- <LI><a href="#[81]">SysTick_Wait1ms</a>
- <LI><a href="#[bf]">SysTick_Wait1us</a>
- <LI><a href="#[80]">Teclas_Input</a>
+ <LI><a href="#[81]">__user_initial_stackheap</a>
+ <LI><a href="#[90]">PLL_Init</a>
+ <LI><a href="#[91]">SysTick_Init</a>
+ <LI><a href="#[bf]">SysTick_Wait1ms</a>
 </UL>
 </UL>
 <P>
@@ -71,7 +69,7 @@ Function Pointers
  <LI><a href="#[2a]">GPIOPortF_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[2b]">GPIOPortG_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[2c]">GPIOPortH_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[3f]">GPIOPortJ_Handler</a> from main.o(i.GPIOPortJ_Handler) referenced from startup.o(RESET)
+ <LI><a href="#[3f]">GPIOPortJ_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[40]">GPIOPortK_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[41]">GPIOPortL_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[52]">GPIOPortM_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
@@ -124,9 +122,9 @@ Function Pointers
  <LI><a href="#[54]">Tamper_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[1f]">Timer0A_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[20]">Timer0B_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[21]">Timer1A_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
+ <LI><a href="#[21]">Timer1A_Handler</a> from main.o(i.Timer1A_Handler) referenced from startup.o(RESET)
  <LI><a href="#[22]">Timer1B_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
- <LI><a href="#[23]">Timer2A_Handler</a> from main.o(i.Timer2A_Handler) referenced from startup.o(RESET)
+ <LI><a href="#[23]">Timer2A_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[24]">Timer2B_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[2f]">Timer3A_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
  <LI><a href="#[30]">Timer3B_Handler</a> from startup.o(RESET) referenced from startup.o(RESET)
@@ -302,6 +300,9 @@ Global Symbols
 <P><STRONG><a name="[2c]"></a>GPIOPortH_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
+<P><STRONG><a name="[3f]"></a>GPIOPortJ_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
 <P><STRONG><a name="[40]"></a>GPIOPortK_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
@@ -437,10 +438,10 @@ Global Symbols
 <P><STRONG><a name="[20]"></a>Timer0B_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[21]"></a>Timer1A_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
+<P><STRONG><a name="[22]"></a>Timer1B_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
-<P><STRONG><a name="[22]"></a>Timer1B_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
+<P><STRONG><a name="[23]"></a>Timer2A_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
 <BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
 </UL>
 <P><STRONG><a name="[24]"></a>Timer2B_Handler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup.o(RESET))
@@ -628,8 +629,8 @@ Global Symbols
 <P><STRONG><a name="[b7]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[79]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; LEDScheck &rArr; Imprime_Frase &rArr; LCD_Instrucao
+<BR><BR>[Stack]<UL><LI>Max Depth = 32 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; funcRotacionaTer &rArr; imprimeStatus &rArr; uartNumero
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -637,7 +638,7 @@ Global Symbols
 
 <P><STRONG><a name="[b8]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
 
-<P><STRONG><a name="[84]"></a>__rt_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit.o(.ARM.Collect$$rtexit$$00000000))
+<P><STRONG><a name="[82]"></a>__rt_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit.o(.ARM.Collect$$rtexit$$00000000))
 <BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 </UL>
 
@@ -661,33 +662,19 @@ Global Symbols
 
 <P><STRONG><a name="[be]"></a>WaitForInterrupt</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text), UNUSED)
 
-<P><STRONG><a name="[83]"></a>__user_initial_stackheap</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text))
+<P><STRONG><a name="[81]"></a>__user_initial_stackheap</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[8d]"></a>PLL_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
+<P><STRONG><a name="[90]"></a>PLL_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8e]"></a>SysTick_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
+<P><STRONG><a name="[91]"></a>SysTick_Init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[81]"></a>SysTick_Wait1ms</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Teclas_Input
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Instrucao
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Caracter
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rotacionaMotor
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[bf]"></a>SysTick_Wait1us</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text), UNUSED)
-
-<P><STRONG><a name="[80]"></a>Teclas_Input</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, funcoes.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
-</UL>
-<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
+<P><STRONG><a name="[bf]"></a>SysTick_Wait1ms</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, utils.o(.text), UNUSED)
 
 <P><STRONG><a name="[c0]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
@@ -699,8 +686,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = __user_setup_stackheap
 </UL>
-<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
+<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
 </UL>
 <BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_sh
 </UL>
@@ -709,14 +696,14 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = exit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit
+<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
 <P><STRONG><a name="[c3]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
-<P><STRONG><a name="[82]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
+<P><STRONG><a name="[80]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
@@ -732,143 +719,159 @@ Global Symbols
 
 <P><STRONG><a name="[c7]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[3f]"></a>GPIOPortJ_Handler</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, main.o(i.GPIOPortJ_Handler))
-<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
-</UL>
-<P><STRONG><a name="[8f]"></a>GPIO_Init</STRONG> (Thumb, 314 bytes, Stack size 0 bytes, gpio.o(i.GPIO_Init))
+<P><STRONG><a name="[94]"></a>ADC_Init</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, main.o(i.ADC_Init))
 <BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[85]"></a>Imprime_Frase</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, main.o(i.Imprime_Frase))
+<P><STRONG><a name="[92]"></a>GPIO_Init</STRONG> (Thumb, 116 bytes, Stack size 0 bytes, gpio.o(i.GPIO_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[83]"></a>PortE_Output</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, gpio.o(i.PortE_Output))
+<BR><BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ativaDesativaMotor
+<LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer1A_Handler
+</UL>
+
+<P><STRONG><a name="[85]"></a>PortF_Output</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, gpio.o(i.PortF_Output))
+<BR><BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ativaDesativaMotor
+</UL>
+
+<P><STRONG><a name="[21]"></a>Timer1A_Handler</STRONG> (Thumb, 130 bytes, Stack size 8 bytes, main.o(i.Timer1A_Handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Timer1A_Handler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortE_Output
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
+</UL>
+<P><STRONG><a name="[95]"></a>Timer_Int_Init</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, main.o(i.Timer_Int_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[93]"></a>UART_Init</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, main.o(i.UART_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[84]"></a>ativaDesativaMotor</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, main.o(i.ativaDesativaMotor))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ativaDesativaMotor
+</UL>
+<BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortF_Output
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortE_Output
+</UL>
+<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcControle
+</UL>
+
+<P><STRONG><a name="[86]"></a>funcControle</STRONG> (Thumb, 158 bytes, Stack size 8 bytes, main.o(i.funcControle))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = funcControle &rArr; ativaDesativaMotor
+</UL>
+<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartGetChar
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartFrase
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartClear
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ativaDesativaMotor
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[8a]"></a>funcRotacionaPot</STRONG> (Thumb, 106 bytes, Stack size 0 bytes, main.o(i.funcRotacionaPot))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = funcRotacionaPot &rArr; imprimeStatus &rArr; uartNumero
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;verificaPot
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartGetChar
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;imprimeStatus
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[8d]"></a>funcRotacionaTer</STRONG> (Thumb, 186 bytes, Stack size 0 bytes, main.o(i.funcRotacionaTer))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = funcRotacionaTer &rArr; imprimeStatus &rArr; uartNumero
+</UL>
+<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartGetChar
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;imprimeStatus
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[8e]"></a>funcSentido</STRONG> (Thumb, 152 bytes, Stack size 4 bytes, main.o(i.funcSentido))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = funcSentido &rArr; uartFrase
+</UL>
+<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartGetChar
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartFrase
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartClear
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[8b]"></a>imprimeStatus</STRONG> (Thumb, 50 bytes, Stack size 4 bytes, main.o(i.imprimeStatus))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = imprimeStatus &rArr; uartNumero
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartNumero
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartFrase
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartClear
+</UL>
+<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcRotacionaTer
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcRotacionaPot
+</UL>
+
+<P><STRONG><a name="[7a]"></a>main</STRONG> (Thumb, 70 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32 + Unknown Stack Size
-<LI>Call Chain = Imprime_Frase &rArr; LCD_Instrucao
+<LI>Call Chain = main &rArr; funcRotacionaTer &rArr; imprimeStatus &rArr; uartNumero
 </UL>
-<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Instrucao
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Caracter
-</UL>
-<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LEDScheck
-</UL>
-
-<P><STRONG><a name="[90]"></a>Int_Init</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, gpio.o(i.Int_Init))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[87]"></a>LCD_Caracter</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, gpio.o(i.LCD_Caracter))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
-<LI>Call Chain = LCD_Caracter
-</UL>
-<BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
-</UL>
-<BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Imprime_Frase
-</UL>
-
-<P><STRONG><a name="[88]"></a>LCD_Init</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, gpio.o(i.LCD_Init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
-<LI>Call Chain = LCD_Init &rArr; LCD_Instrucao
-</UL>
-<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Instrucao
-</UL>
-<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[86]"></a>LCD_Instrucao</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, gpio.o(i.LCD_Instrucao))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
-<LI>Call Chain = LCD_Instrucao
-</UL>
-<BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
-</UL>
-<BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Init
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Imprime_Frase
-</UL>
-
-<P><STRONG><a name="[89]"></a>LEDScheck</STRONG> (Thumb, 130 bytes, Stack size 8 bytes, main.o(i.LEDScheck))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
-<LI>Call Chain = LEDScheck &rArr; Imprime_Frase &rArr; LCD_Instrucao
-</UL>
-<BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Imprime_Frase
-</UL>
-<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[8a]"></a>PortA_Output</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, gpio.o(i.PortA_Output))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LEDScheck
-</UL>
-
-<P><STRONG><a name="[96]"></a>PortH_Output</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, gpio.o(i.PortH_Output))
-<BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;passoMotor
-</UL>
-
-<P><STRONG><a name="[8c]"></a>PortN_Output</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, gpio.o(i.PortN_Output))
-<BR><BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer2A_Handler
-</UL>
-
-<P><STRONG><a name="[92]"></a>PortP_Output</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, gpio.o(i.PortP_Output))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[8b]"></a>PortQ_Output</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, gpio.o(i.PortQ_Output))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LEDScheck
-</UL>
-
-<P><STRONG><a name="[23]"></a>Timer2A_Handler</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, main.o(i.Timer2A_Handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Timer2A_Handler
-</UL>
-<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortN_Output
-</UL>
-<BR>[Address Reference Count : 1]<UL><LI> startup.o(RESET)
-</UL>
-<P><STRONG><a name="[91]"></a>Timer_Int_Init</STRONG> (Thumb, 114 bytes, Stack size 0 bytes, main.o(i.Timer_Int_Init))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[7a]"></a>main</STRONG> (Thumb, 578 bytes, Stack size 0 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
-<LI>Call Chain = main &rArr; LEDScheck &rArr; Imprime_Frase &rArr; LCD_Instrucao
-</UL>
-<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Teclas_Input
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortQ_Output
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortP_Output
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortA_Output
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Init
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Int_Init
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rotacionaMotor
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;preencheFraseRotacao
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Int_Init
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LEDScheck
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Imprime_Frase
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Init
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
+<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcSentido
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcRotacionaTer
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcRotacionaPot
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcControle
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Init
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Int_Init
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Init
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PLL_Init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[95]"></a>passoMotor</STRONG> (Thumb, 130 bytes, Stack size 8 bytes, main.o(i.passoMotor))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = passoMotor
-</UL>
-<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PortH_Output
-</UL>
-<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rotacionaMotor
+<P><STRONG><a name="[96]"></a>uartChar</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, main.o(i.uartChar))
+<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartNumero
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartFrase
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartClear
 </UL>
 
-<P><STRONG><a name="[93]"></a>preencheFraseRotacao</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, main.o(i.preencheFraseRotacao))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[87]"></a>uartClear</STRONG> (Thumb, 46 bytes, Stack size 4 bytes, main.o(i.uartClear))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = uartClear
+</UL>
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartChar
+</UL>
+<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;imprimeStatus
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcSentido
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcControle
 </UL>
 
-<P><STRONG><a name="[94]"></a>rotacionaMotor</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, main.o(i.rotacionaMotor))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
-<LI>Call Chain = rotacionaMotor &rArr; passoMotor
+<P><STRONG><a name="[88]"></a>uartFrase</STRONG> (Thumb, 22 bytes, Stack size 4 bytes, main.o(i.uartFrase))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = uartFrase
 </UL>
-<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;passoMotor
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Wait1ms
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartChar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;imprimeStatus
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcSentido
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcControle
+</UL>
+
+<P><STRONG><a name="[89]"></a>uartGetChar</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, main.o(i.uartGetChar))
+<BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcSentido
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcRotacionaTer
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcRotacionaPot
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcControle
+</UL>
+
+<P><STRONG><a name="[8f]"></a>uartNumero</STRONG> (Thumb, 70 bytes, Stack size 28 bytes, main.o(i.uartNumero))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = uartNumero
+</UL>
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartChar
+</UL>
+<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;imprimeStatus
+</UL>
+
+<P><STRONG><a name="[8c]"></a>verificaPot</STRONG> (Thumb, 70 bytes, Stack size 0 bytes, main.o(i.verificaPot))
+<BR><BR>[Called By]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;funcRotacionaPot
 </UL>
 
 <P><STRONG><a name="[74]"></a>_fp_init</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, fpinit.o(x$fpl$fpinit))
